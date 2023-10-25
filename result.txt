@@ -1,0 +1,35 @@
+## Example Usage
+
+This section provides a sample usage of the DNA Sequence Alignment Program using provided example sequences.
+
+### Input Sequences
+
+##Input through Console
+
+We will use the following sequences for this example:
+
+- Maximum shift: 2
+- Sequence 1: ACGTAA
+- Sequence 2: GTAAGG
+
+##results
+
+Matches without any shifts: 0
+Chained sequences without shift: None
+
+After applying the best shift of 2:
+Matches: 4
+Maximum Contiguous Chain: GTAA
+
+##Input through file
+
+We will the sequence1.txt and sequence2.txt as the file inputs.
+
+##results
+
+Matches without any shifts: 47
+Chained sequences without shift: C, T, C, TG, A, AG, T, GT, T, CG, A, C, A, T, T, T, T, TTC, C, TAG, T, G, CC, A, C, GA, TG, TCG, G, GGT, G, A
+
+After applying the best shift of 0:
+Matches: 47
+Maximum Contiguous Chain: TTC
