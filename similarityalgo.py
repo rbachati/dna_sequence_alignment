@@ -19,31 +19,6 @@ def identify_chained_sequences(sequence1, sequence2):
         chained_sequences.append(chain)
     return chained_sequences
 
-def calculate_from_console_input(max_shift):
-    sequence1 = get_user_input("Enter Sequence 1: ")
-    sequence2 = get_user_input("Enter Sequence 2: ")
-
-    chained_sequences = identify_chained_sequences(sequence1, sequence2)
-    print("Chained sequences without shift:", chained_sequences)
-
-    shift, matches, chain = calculate_best_shift(sequence1, sequence2, max_shift)
-    print(f"Best shift: {shift}, Matches: {matches}, Maximum Contiguous Chain: {chain}")
-
-def calculate_from_file_input(max_shift):
-    filename1 = get_user_input("Enter filename for Sequence 1: ")
-    filename2 = get_user_input("Enter filename for Sequence 2: ")
-    try:
-        sequence1 = load_sequence_from_file(filename1)
-        sequence2 = load_sequence_from_file(filename2)
-
-        shift, matches, chain = calculate_best_shift(sequence1, sequence2, max_shift)
-        print(f"Best shift: {shift}, Matches: {matches}, Maximum Contiguous Chain: {chain}")
-
-    except FileNotFoundError:
-        print("File not found!")
-    except ValueError:
-        print("File format is incorrect!")
-
 def calculate_matches(sequence1, sequence2, shift):
     # Shift sequence2
     sequence2_shifted = sequence2[-shift:] + sequence2[:-shift]
