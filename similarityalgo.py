@@ -1,13 +1,13 @@
 def get_user_input(prompt):
     return input(prompt)
 
-def validate_sequence(sequence):
-    # Check if only characters A,C,G,T are in the sequence
-    if any(base.islower() for base in sequence):
-        raise ValueError("Invalid character casing. DNA should be represented in capital letters A, C, G, T.")
+#def validate_sequence(sequence):
+#    Check if only characters A,C,G,T are in the sequence
+#    if any(base.islower() for base in sequence):
+#       raise ValueError("Invalid character casing. DNA should be represented in capital letters A, C, G, T.")
     
-    if not all(base in 'ACGT' for base in sequence):
-        raise ValueError("Invalid sequence. Only characters A, C, G, T are allowed.")
+#    if not all(base in 'ACGT' for base in sequence):
+#       raise ValueError("Invalid sequence. Only characters A, C, G, T are allowed.")
 
 def load_sequence_from_file(filename):
     with open(filename, 'r') as file:
@@ -73,8 +73,8 @@ def calculate_from_file_input(max_shift):
     try:
         sequence1 = load_sequence_from_file(filename1)
         sequence2 = load_sequence_from_file(filename2)
-        validate_sequence(sequence1)
-        validate_sequence(sequence2)
+        #validate_sequence(sequence1)
+        #validate_sequence(sequence2)
 
         # Matches without any shifts
         matches = count_matches_without_shift(sequence1, sequence2)
@@ -87,13 +87,15 @@ def calculate_from_file_input(max_shift):
         # Maximum contiguous chain without any shifts
         max_chain_without_shift = max(chained_sequences, key=len, default="")
         print(f"Maximum contiguous chain without shift: {max_chain_without_shift}")
-
+        print(f"Length of maximum contiguous chain without shift: {len(max_chain_without_shift)}")
+        
         # Best chain after performing shifts
         shift, matches, chain, chained_sequences_after_shift = calculate_best_shift(sequence1, sequence2, max_shift)
         print(f"\nAfter applying the best shift of {shift}:")
         print(f"Matches: {matches}")
         print("Chained sequences:", ', '.join(chained_sequences_after_shift) if chained_sequences_after_shift else "None")
         print(f"Maximum Contiguous Chain: {chain}")  # Print the chain
+        print(f"Length of maximum contiguous chain after shift: {len(chain)}")
 
     except FileNotFoundError:
         print(f"Error: {filename1} or {filename2} was not found!")
@@ -110,8 +112,8 @@ def calculate_from_console_input(max_shift):
     sequence2 = get_user_input("Enter Sequence 2: ")
     try:
         
-        validate_sequence(sequence1)
-        validate_sequence(sequence2)
+        #validate_sequence(sequence1)
+        #validate_sequence(sequence2)
 
         # Matches without any shifts
         matches = count_matches_without_shift(sequence1, sequence2)
@@ -120,6 +122,8 @@ def calculate_from_console_input(max_shift):
         # Chained sequences without any shifts
         chained_sequences = identify_chained_sequences(sequence1, sequence2)
         print("Chained sequences without shift:", ', '.join(chained_sequences) if chained_sequences else "None")
+        print(f"Maximum Contiguous Chain: {max(chained_sequences, key=len, default='')}")
+        print(f"Length of maximum contiguous chain: {len(max(chained_sequences, key=len, default=''))}")
 
         # Best chain after performing shifts
         shift, matches, chain, chained_sequences_after_shift = calculate_best_shift(sequence1, sequence2, max_shift)
@@ -127,6 +131,7 @@ def calculate_from_console_input(max_shift):
         print(f"Matches: {matches}")
         print("Chained sequences:", ', '.join(chained_sequences_after_shift) if chained_sequences_after_shift else "None")
         print(f"Maximum Contiguous Chain: {chain}")
+        print(f"Length of maximum contiguous chain after shift: {len(chain)}")
     except ValueError as e:
         print(f"Error: {e}")
 
